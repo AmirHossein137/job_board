@@ -27,6 +27,7 @@ import { UploadDropzone } from "@/components/general/UploadThingReexported";
 import { createCompany } from "@/app/action";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { XIcon } from "lucide-react";
 
 const CompanyForm = () => {
   const form = useForm<z.infer<typeof companySchema>>({
@@ -170,12 +171,20 @@ const CompanyForm = () => {
                   {field.value ? (
                     <div className="relative w-fit">
                       <Image
-                        src={field?.value}
+                        src={field.value}
                         alt="image"
                         width={100}
                         height={100}
                         className="rounded-lg"
                       />
+                      <Button
+                        type="button"
+                        variant={"destructive"}
+                        className="absolute -top-2 -right-2"
+                        onClick={() => field.onChange("")}
+                      >
+                        <XIcon className="size-4" />
+                      </Button>
                     </div>
                   ) : (
                     <UploadDropzone

@@ -38,7 +38,11 @@ const Navbar = async () => {
           Post Job
         </Link>
         {session?.user ? (
-          <UserDropdown />
+          <UserDropdown
+            email={session?.user?.email as string}
+            name={session?.user?.name as string}
+            image={session?.user?.image as string}
+          />
         ) : (
           <Link
             className={buttonVariants({ size: "lg", variant: "outline" })}

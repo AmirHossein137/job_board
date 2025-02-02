@@ -17,9 +17,12 @@ import {
   Italic,
   ListIcon,
   ListOrdered,
+  Redo,
   Strikethrough,
+  Undo,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Button } from "../ui/button";
 
 interface iAppProps {
   editor: Editor | null;
@@ -229,6 +232,37 @@ const MenuBar: React.FC<iAppProps> = ({ editor }) => {
               </Toggle>
             </TooltipTrigger>
             <TooltipContent>Align Right</TooltipContent>
+          </Tooltip>
+        </div>
+        <div className="w-px h-6 bg-border mx-2"></div>
+        <div className="flex flex-wrap gap-1">
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                size={"sm"}
+                variant="ghost"
+                type="button"
+                onClick={() => editor.chain().focus().undo().run()}
+                disabled={!editor.can().undo()}
+              >
+                <Undo />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Undo</TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                size={"sm"}
+                variant="ghost"
+                type="button"
+                onClick={() => editor.chain().focus().redo().run()}
+                disabled={!editor.can().redo()}
+              >
+                <Redo />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Redo</TooltipContent>
           </Tooltip>
         </div>
       </TooltipProvider>

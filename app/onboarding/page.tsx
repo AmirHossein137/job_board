@@ -7,11 +7,11 @@ async function checkIfOnboardingCompleted(userId: string) {
   const user = await prisma.user.findUnique({
     where: { id: userId },
     select: {
-      oboardingCompoleted: true,
+      onboardingCompleted: true,
     },
   });
 
-  if (user?.oboardingCompoleted === true) {
+  if (user?.onboardingCompleted === true) {
     redirect("/");
   }
 }

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import {
   Form,
   FormControl,
@@ -35,18 +35,35 @@ import { Button } from "../ui/button";
 import Image from "next/image";
 import { UploadDropzone } from "../general/UploadThingReexported";
 import JobListingDurationSelector from "../general/JobListingDurationSelector";
+import { createJob } from "@/app/action";
 
-const CreateJobForm = () => {
+interface CreateJobFormProps {
+  companyLocation: string;
+  companyName: string;
+  companyAbout: string;
+  companyLogo: string;
+  companyWebsite: string;
+  companyXAccount: string | null;
+}
+
+const CreateJobForm: React.FC<CreateJobFormProps> = ({
+  companyAbout,
+  companyLocation,
+  companyLogo,
+  companyName,
+  companyWebsite,
+  companyXAccount,
+}) => {
   const form = useForm<z.infer<typeof jobSchema>>({
     resolver: zodResolver(jobSchema),
     defaultValues: {
       benefits: [],
-      companyAbout: "",
-      companyLocation: "",
-      companyName: "",
-      companyLogo: "",
-      companyWebsite: "",
-      companyXAccount: "",
+      companyAbout: companyAbout,
+      companyLocation: companyLocation,
+      companyName: companyName,
+      companyLogo: companyLogo,
+      companyWebsite: companyWebsite,
+      companyXAccount: companyXAccount || "",
       employmentType: "",
       jobDescription: "",
       jobTitle: "",
@@ -57,8 +74,19 @@ const CreateJobForm = () => {
     },
   });
 
+  const [pending, setPending] = useState(false);
+
   async function onSubmit(values: z.infer<typeof jobSchema>) {
-    console.log("should worl");
+    try {
+      setPending(true);
+      await createJob(values);
+    } catch (error) {
+      if (error instanceof Error && error.message !== "NEXT_REDIRECT") {
+        console.log("something went wrong");
+      }
+    } finally {
+      setPending(false);
+    }
   }
 
   return (
@@ -364,8 +392,8 @@ const CreateJobForm = () => {
           </CardContent>
         </Card>
 
-        <Button type="submit" className="w-full">
-          Post Job
+        <Button type="submit" className="w-full" disabled={pending}>
+          {pending ? "submitting..." : "Create Job Post"}
         </Button>
       </form>
     </Form>

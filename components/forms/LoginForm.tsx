@@ -9,7 +9,7 @@ import {
 import * as React from "react";
 import type { SVGProps } from "react";
 import { auth, signIn } from "@/app/utils/auth";
-import GeneralSubmitButton from "../general/SubmitButtons";
+import { GeneralSubmitButton } from "../general/SubmitButtons";
 import { redirect } from "next/navigation";
 
 const Github = (props: SVGProps<SVGSVGElement>) => (

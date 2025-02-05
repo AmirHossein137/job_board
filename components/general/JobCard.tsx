@@ -26,7 +26,7 @@ interface JobCardProps {
 
 const JobCard: React.FC<JobCardProps> = ({ job }) => {
   return (
-    <Link href={`/job`}>
+    <Link href={`/job/${job.id}`}>
       <Card className="hover:shadow-lg transition-all duration-300 hover:border-primary">
         <CardHeader>
           <div className="flex flex-col md:flex-row gap-4">
@@ -35,7 +35,7 @@ const JobCard: React.FC<JobCardProps> = ({ job }) => {
               alt={job.company.name}
               width={48}
               height={48}
-              className="size-12 rounded-lg"
+              className="rounded-lg object-contain"
             />
             <div>
               <h1 className="text-xl md:text-2xl font-bold">{job.jobTitle}</h1>

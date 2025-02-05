@@ -6,7 +6,7 @@ import { JobPostStatus } from "@prisma/client";
 
 async function getJobs({
   page = 1,
-  pageSize = 2,
+  pageSize = 5,
   jobTypes = [],
   location = "",
 }: {
@@ -32,7 +32,7 @@ async function getJobs({
 
   const [data, totalCount] = await Promise.all([
     prisma.jobPost.findMany({
-      where: where,
+      where,
       skip,
       take: pageSize,
       select: {
@@ -80,7 +80,7 @@ export async function JobLists({
 }) {
   const { jobs, totalPages } = await getJobs({
     page: currentPage,
-    pageSize: 2,
+    pageSize: 5,
     jobTypes: jobTypes,
     location: location,
   });

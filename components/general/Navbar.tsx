@@ -4,13 +4,19 @@ import { buttonVariants } from "../ui/button";
 import { ThemeToggle } from "./ThemeToggle";
 import { auth } from "@/app/utils/auth";
 import UserDropdown from "./UserDropdown";
+import Image from "next/image";
 
 const Navbar = async () => {
   const session = await auth();
 
   return (
     <div className="flex items-center justify-between py-5">
-      <Link href={"/"}>Logo</Link>
+      <Link href="/" className="flex items-center gap-5 justify-center">
+        <Image src={"/logo.svg"} alt="Job Logo" width={50} height={50} />
+        <span className="text-4xl text-blue-500 font-bold hidden md:flex">
+          Job<span className=" text-black dark:text-white">Board</span>
+        </span>
+      </Link>
       {/* <div className="flex items-center gap-6">
         <ThemeToggle />
         {session?.user ? (
@@ -32,7 +38,7 @@ const Navbar = async () => {
         )}
       </div> */}
       {/* Desktop Navigation */}
-      <div className="hidden md:flex items-center gap-5">
+      <div className="flex items-center gap-5">
         <ThemeToggle />
         <Link className={buttonVariants({ size: "lg" })} href="/post-job">
           Post Job

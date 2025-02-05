@@ -22,9 +22,9 @@ export default async function Home({ searchParams }: SearchParamsProps) {
   )};location=${location}`;
 
   return (
-    <div className="grid grid-cols-3 gap-8">
+    <div className="grid lg:grid-cols-3 gap-8">
       <JobFilter />
-      <div className="col-span-2 flex-col gap-6">
+      <div className="col-span-1 lg:col-span-2 flex-col gap-6">
         <Suspense fallback={<JobListingsLoading key={filterKey} />}>
           <JobLists
             currentPage={currentPage}

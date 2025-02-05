@@ -195,7 +195,7 @@ const CompanyForm = () => {
                       onUploadError={() => {
                         console.log("somthing Error");
                       }}
-                      className="ut-button:bg-primary ut-button:text-white ut-button:hover:bg-primary/90 ut-label:text-muted-foreground ut-allowed-content:text-muted-foreground border-primary"
+                      className="ut-button:bg-primary ut-button:text-white ut-button:hover:bg-primary/90 ut-label:text-muted-foreground ut-allowed-content:text-muted-foreground border-primary dark:text-white"
                     />
                   )}
                 </div>

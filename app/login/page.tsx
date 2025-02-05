@@ -10,7 +10,7 @@ const LoginPage = () => {
         <Link href="/" className="flex items-center gap-5 justify-center">
           <Image src={"/logo.svg"} alt="Job Logo" width={50} height={50} />
           <span className="text-4xl text-blue-500 font-bold">
-            Job<span className=" text-white">Board</span>
+            Job<span className=" text-white dark:text-black">Board</span>
           </span>
         </Link>
         <LoginForm />
